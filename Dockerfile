@@ -1,11 +1,11 @@
 # Menggunakan image Node.js versi terbaru
-FROM node:20-alpine
+FROM strapi/strapi
 
 # Membuat direktori kerja di dalam container
-WORKDIR /app
+WORKDIR /srv/app
 
 # Menyalin file package.json dan package-lock.json ke direktori kerja
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json /app/
 
 # Menginstal dependensi
 RUN npm install
