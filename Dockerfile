@@ -1,26 +1,26 @@
-# Menggunakan image Node.js versi terbaru
-FROM strapi/strapi
+# Menggunakan Node.js sebagai base image
+FROM node:18-alpine
 
-# Membuat direktori kerja di dalam container
-WORKDIR /srv/app
+# Direktori kerja
+WORKDIR /usr/src/app
 
-# Menyalin file package.json dan package-lock.json ke direktori kerja
-COPY package.json package-lock.json /app/
+# Menyalin file package.json dan package-lock.json
+COPY package.json package-lock.json ./
 
-# Menginstal dependensi
+# Install dependencies
 RUN npm install
 
-# Menyalin seluruh konten aplikasi ke direktori kerja
+# Menyalin seluruh aplikasi ke dalam container
 COPY . .
 
-# Membangun aplikasi Strapi
+# Build aplikasi Strapi
 RUN npm run build
 
-# Mengatur variabel lingkungan untuk database SQLite
+# Mengatur variabel lingkungan untuk SQLite
 ENV DATABASE_CLIENT=sqlite
 ENV DATABASE_FILENAME=.tmp/data.db
 
-# Ekspor port 1337
+# Expose port default Strapi
 EXPOSE 1337
 
 # Menjalankan Strapi

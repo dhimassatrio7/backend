@@ -1,19 +1,21 @@
 version: "3.8"
-
 services:
   frontend:
     build:
       context: ./frontend
     ports:
       - "80:80"
+    restart: always
 
   backend:
     build:
       context: ./backend
     ports:
       - "1337:1337"
-    environment:
-      DATABASE_CLIENT: "sqlite"
-      DATABASE_FILENAME: ".tmp/data.db"
     volumes:
-      - ./backend/.tmp:/app/.tmp
+      # Mount folder .tmp untuk persistensi database SQLite
+      - ./backend/.tmp:/usr/src/app/.tmp
+    environment:
+      # Variabel lingkungan untuk backend Strapi
+      NODE_ENV: production
+    restart: always
