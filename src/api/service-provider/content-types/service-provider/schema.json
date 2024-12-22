@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_providers",
+  "info": {
+    "singularName": "service-provider",
+    "pluralName": "service-providers",
+    "displayName": "Service_Provider",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "company_description": {
+      "type": "blocks"
+    },
+    "location": {
+      "type": "string"
+    },
+    "request_status": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Rejected"
+      ],
+      "default": "Pending"
+    },
+    "contact": {
+      "type": "string"
+    }
+  }
+}
